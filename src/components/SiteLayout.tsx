@@ -1,12 +1,9 @@
 import type { PropsWithChildren } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useTheme } from '../contexts/ThemeContext'
-import { useFilterStore } from '../features/filters/filterStore'
 
 export default function SiteLayout({ children }: PropsWithChildren) {
   const { theme, toggleTheme } = useTheme()
-  const searchQuery = useFilterStore((state) => state.searchQuery)
-  const setSearchQuery = useFilterStore((state) => state.setSearchQuery)
 
   return (
     <div className="layout-shell">
@@ -21,16 +18,6 @@ export default function SiteLayout({ children }: PropsWithChildren) {
               <span className="brand-caption">Tri thức trong tầm tay</span>
             </span>
           </NavLink>
-          <label className="header-search">
-            <span aria-hidden="true">⌕</span>
-            <input
-              aria-label="Tìm sách, tác giả, chủ đề"
-              placeholder="Tìm sách, tác giả, chủ đề..."
-              type="search"
-              value={searchQuery}
-              onChange={(event) => setSearchQuery(event.target.value)}
-            />
-          </label>
           <nav className="header-actions" aria-label="Điều hướng chính">
             <NavLink
               className={({ isActive }) =>

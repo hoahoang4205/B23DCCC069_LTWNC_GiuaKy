@@ -36,7 +36,7 @@ export default function Home() {
 
   return (
     <SiteLayout>
-      <main>
+      <main className="home-main">
         <section className="hero-panel">
           <div className="hero-copy">
             <p className="hero-badge"><span aria-hidden="true">▣</span> Thư viện mini của bạn</p>
@@ -73,69 +73,75 @@ export default function Home() {
           </div>
         </section>
 
-        <section aria-label="Tìm kiếm và lọc sách" className="filter-panel">
-          <label>
-            <span className="filter-search-icon" aria-hidden="true">⌕</span>
-            <input
-              className="text-input filter-search-input"
-              type="search"
-              placeholder="Tìm sách, tác giả, thể loại..."
-              value={searchQuery}
-              onChange={(event) => setSearchQuery(event.target.value)}
-            />
-          </label>
-          <label className="filter-select-wrap">
-            <span className="field-label">Thể loại</span>
-            <select
-              className="select-input"
-              value={categoryFilter}
-              onChange={(event) => {
-                const selectedCategory = categories.find(
-                  (category) => category === event.target.value,
-                )
-                if (selectedCategory) setCategoryFilter(selectedCategory)
-              }}
+        <section className="catalog-frame" aria-label="Danh mục thư viện">
+          <div className="catalog-toolbar">
+            <div className="section-heading featured-heading">
+              <div>
+                <h2><span aria-hidden="true">▣</span> Sách nổi bật</h2>
+                <p>Những cuốn sách được nhiều bạn đọc quan tâm nhất</p>
+              </div>
+            </div>
+            <section
+              aria-label="Tìm kiếm và lọc sách"
+              className="filter-panel"
             >
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="filter-select-wrap">
-            <span className="field-label">Sắp xếp theo</span>
-            <select
-              className="select-input"
-              value={sortBy}
-              onChange={(event) => {
-                if (
-                  event.target.value === 'Mới nhất' ||
-                  event.target.value === 'Tên A-Z' ||
-                  event.target.value === 'Nhiều bản'
-                ) {
-                  setSortBy(event.target.value)
-                }
-              }}
-            >
-              <option>Mới nhất</option>
-              <option>Tên A-Z</option>
-              <option>Nhiều bản</option>
-            </select>
-          </label>
-        </section>
-
-        <div className="section-heading featured-heading">
-          <div>
-            <h2><span aria-hidden="true">▣</span> Sách nổi bật</h2>
-            <p>Những cuốn sách được nhiều bạn đọc quan tâm nhất</p>
+              <label>
+                <span className="filter-search-icon" aria-hidden="true">⌕</span>
+                <input
+                  className="text-input filter-search-input"
+                  type="search"
+                  placeholder="Tìm sách, tác giả, thể loại..."
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                />
+              </label>
+              <label className="filter-select-wrap">
+                <span className="field-label">Thể loại</span>
+                <select
+                  className="select-input"
+                  value={categoryFilter}
+                  onChange={(event) => {
+                    const selectedCategory = categories.find(
+                      (category) => category === event.target.value,
+                    )
+                    if (selectedCategory) setCategoryFilter(selectedCategory)
+                  }}
+                >
+                  {categories.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="filter-select-wrap">
+                <span className="field-label">Sắp xếp theo</span>
+                <select
+                  className="select-input"
+                  value={sortBy}
+                  onChange={(event) => {
+                    if (
+                      event.target.value === 'Mới nhất' ||
+                      event.target.value === 'Tên A-Z' ||
+                      event.target.value === 'Nhiều bản'
+                    ) {
+                      setSortBy(event.target.value)
+                    }
+                  }}
+                >
+                  <option>Mới nhất</option>
+                  <option>Tên A-Z</option>
+                  <option>Nhiều bản</option>
+                </select>
+              </label>
+            </section>
           </div>
-        </div>
-        <section className="library-columns">
-          <div className="library-results">
-            <BookList />
-          </div>
-          <BorrowedBooksSidebar />
+          <section className="library-columns">
+            <div className="library-results">
+              <BookList />
+            </div>
+            <BorrowedBooksSidebar />
+          </section>
         </section>
       </main>
     </SiteLayout>
